@@ -1,33 +1,75 @@
-div(ng-include='"components/navbar/navbar.html"')
-
-header#banner.hero-unit
-  .container
-    h1 'Allo, 'Allo!
-    p.lead Kick-start your next web app with Angular Fullstack
-    img#banner__img(src='assets/images/yeoman.png', alt='I\'m Yeoman')
-
-.container
-  .row
-    .col-lg-12
-      h1.page-header Features:
-      ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='thing in awesomeThings')
-        li
-          a(href='#', tooltip='{{thing.info}}')
-            | {{thing.name}}
-            button.close(type='button', ng-click='deleteThing(thing)') ×
-
-  form.thing-form
-    label Syncs in realtime across clients
-    p.input-group
-      input.form-control(type='text', placeholder='Add a new thing here.', ng-model='newThing')
-      span.input-group-btn
-        button.btn.btn-primary(type='submit', ng-click='addThing()') Add New
-
-footer.footer
-  .container
-    p
-      | Angular Fullstack v2.1.1
-      = ' | '
-      a(href='https://twitter.com/tyhenkel') @tyhenkel
-      = ' | '
-      a(href='https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open') Issues
+#page-wrapper(ng-class="{'open': toggle}", ng-cloak='')
+  // Sidebar
+  #sidebar-wrapper
+    ul.sidebar
+      li.sidebar-main
+        a(ng-click='toggleSidebar()')
+          | Dashboard
+          span.menu-icon.glyphicon.glyphicon-transfer
+      li.sidebar-title
+        span NAVIGATION
+      li.sidebar-list
+        a(ui-sref='main.dashboard')
+          | Dashboard
+          span.menu-icon.fa.fa-tachometer
+      li.sidebar-list
+        a(ui-sref='main.tables')
+          | Tables
+          span.menu-icon.fa.fa-table
+    .sidebar-footer
+      .col-xs-4
+        a(href='https://github.com/rdash/rdash-angular', target='_blank')
+          | Github
+      .col-xs-4
+        a(href='https://github.com/rdash/rdash-angular/blob/master/README.md', target='_blank')
+          | About
+      .col-xs-4
+        a(href='#')
+          | Support
+  // End Sidebar
+  #content-wrapper
+    .page-content
+      // Header Bar
+      .row.header
+        .col-xs-12
+          .user.pull-right
+            .item.dropdown(uib-dropdown='')
+              a.dropdown-toggle(href='#', uib-dropdown-toggle='')
+                img(src='assets/images/avatar.jpg')
+              ul.dropdown-menu.dropdown-menu-right
+                li.dropdown-header
+                  | Joe Bloggs
+                li.divider
+                li.link
+                  a(href='#')
+                    | Profile
+                li.link
+                  a(href='#')
+                    | Menu Item
+                li.link
+                  a(href='#')
+                    | Menu Item
+                li.divider
+                li.link
+                  a(href='#')
+                    | Logout
+            .item.dropdown(uib-dropdown='')
+              a.dropdown-toggle(href='#', uib-dropdown-toggle='')
+                i.fa.fa-bell-o
+              ul.dropdown-menu.dropdown-menu-right
+                li.dropdown-header
+                  | Notifications
+                li.divider
+                li
+                  a(href='#') Server Down!
+          .meta
+            .page
+              | Dashboard
+            .breadcrumb-links
+              | Home / Dashboard
+      // End Header Bar
+      // Main Content
+      div(ui-view='')
+    // End Page Content
+  // End Content Wrapper
+// End Page Wrapper

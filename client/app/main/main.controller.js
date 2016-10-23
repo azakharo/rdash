@@ -1,27 +1,36 @@
 'use strict';
 
 angular.module('projectsApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
-    $scope.awesomeThings = [];
+  .controller('MainCtrl', function ($scope, $cookieStore) {
+    /**
+     * Sidebar Toggle & Cookie Control
+     */
+    var mobileView = 992;
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-      socket.syncUpdates('thing', $scope.awesomeThings);
-    });
+    $scope.getWidth = function() {
+      return window.innerWidth;
+    };
 
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
+    $scope.$watch($scope.getWidth, function(newValue, oldValue) {
+      if (newValue >= mobileView) {
+        if (angular.isDefined($cookieStore.get('toggle'))) {
+          $scope.toggle = ! $cookieStore.get('toggle') ? false : true;
+        } else {
+          $scope.toggle = true;
+        }
+      } else {
+        $scope.toggle = false;
       }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
-    };
 
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
-
-    $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('thing');
     });
+
+    $scope.toggleSidebar = function() {
+      $scope.toggle = !$scope.toggle;
+      $cookieStore.put('toggle', $scope.toggle);
+    };
+
+    window.onresize = function() {
+      $scope.$apply();
+    };
+
   });
