@@ -1,4 +1,4 @@
-.row.alerts-container(data-ng-controller='AlertsCtrl', data-ng-show='alerts.length')
+.row.alerts-container(data-ng-show='alerts.length')
   .col-xs-12
     div(uib-alert, data-ng-repeat='alert in alerts', ng-class="'alert-' + (alert.type || 'warning')",
     close='closeAlert($index)') {{alert.msg}}

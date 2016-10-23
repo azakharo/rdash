@@ -16,11 +16,13 @@ angular.module('projectsApp').config(['$stateProvider', '$urlRouterProvider',
       })
       .state('main.dashboard', {
         url: '/dashboard',
-        templateUrl: 'app/dashboard/dashboard.html'
+        templateUrl: 'app/dashboard/dashboard.html',
+        controller: 'DashboardCtrl'
       })
       .state('main.tables', {
         url: '/tables',
-        templateUrl: 'app/tables/tables.html'
+        templateUrl: 'app/tables/tables.html',
+        controller: 'TablesCtrl'
       });
 
   }
