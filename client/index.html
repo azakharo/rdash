@@ -13,6 +13,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/rdash-ui/dist/css/rdash.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -21,13 +22,124 @@
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
-  <body ng-app="projectsApp">
+  <body ng-app="projectsApp" ng-controller="MasterCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div ui-view=""></div>
+
+    <div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak>
+
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar">
+          <li class="sidebar-main">
+            <a ng-click="toggleSidebar()">
+              Dashboard
+              <span class="menu-icon glyphicon glyphicon-transfer"></span>
+            </a>
+          </li>
+          <li class="sidebar-title"><span>NAVIGATION</span></li>
+          <li class="sidebar-list">
+            <a ui-sref="dashboard">Dashboard <span class="menu-icon fa fa-tachometer"></span></a>
+          </li>
+          <li class="sidebar-list">
+            <a ui-sref="tables">Tables <span class="menu-icon fa fa-table"></span></a>
+          </li>
+        </ul>
+        <div class="sidebar-footer">
+          <div class="col-xs-4">
+            <a href="https://github.com/rdash/rdash-angular" target="_blank">
+              Github
+            </a>
+          </div>
+          <div class="col-xs-4">
+            <a href="https://github.com/rdash/rdash-angular/blob/master/README.md" target="_blank">
+              About
+            </a>
+          </div>
+          <div class="col-xs-4">
+            <a href="#">
+              Support
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- End Sidebar -->
+
+      <div id="content-wrapper">
+        <div class="page-content">
+
+          <!-- Header Bar -->
+          <div class="row header">
+            <div class="col-xs-12">
+              <div class="user pull-right">
+                <div class="item dropdown" uib-dropdown>
+                  <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
+                    <img src="assets/images/avatar.jpg">
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <li class="dropdown-header">
+                      Joe Bloggs
+                    </li>
+                    <li class="divider"></li>
+                    <li class="link">
+                      <a href="#">
+                        Profile
+                      </a>
+                    </li>
+                    <li class="link">
+                      <a href="#">
+                        Menu Item
+                      </a>
+                    </li>
+                    <li class="link">
+                      <a href="#">
+                        Menu Item
+                      </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="link">
+                      <a href="#">
+                        Logout
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="item dropdown" uib-dropdown>
+                  <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
+                    <i class="fa fa-bell-o"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <li class="dropdown-header">
+                      Notifications
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                      <a href="#">Server Down!</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="meta">
+                <div class="page">
+                  Dashboard
+                </div>
+                <div class="breadcrumb-links">
+                  Home / Dashboard
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Header Bar -->
+
+          <!-- Main Content -->
+          <div ui-view></div>
+
+        </div><!-- End Page Content -->
+      </div><!-- End Content Wrapper -->
+    </div><!-- End Page Wrapper -->
+
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -60,10 +172,17 @@
           <script src="app/account/signup/signup.controller.js"></script>
           <script src="app/admin/admin.controller.js"></script>
           <script src="app/admin/admin.js"></script>
+          <script src="app/controllers/alert-ctrl.js"></script>
+          <script src="app/controllers/master-ctrl.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
           <script src="components/auth/auth.service.js"></script>
           <script src="components/auth/user.service.js"></script>
+          <script src="components/dashboard-widjet/loading.js"></script>
+          <script src="components/dashboard-widjet/widget-body.js"></script>
+          <script src="components/dashboard-widjet/widget-footer.js"></script>
+          <script src="components/dashboard-widjet/widget-header.js"></script>
+          <script src="components/dashboard-widjet/widget.js"></script>
           <script src="components/modal/modal.service.js"></script>
           <script src="components/mongoose-error/mongoose-error.directive.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>

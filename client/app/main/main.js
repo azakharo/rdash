@@ -3,9 +3,12 @@
 angular.module('projectsApp')
   .config(function ($stateProvider) {
     $stateProvider
-      .state('main', {
+      .state('dashboard', {
         url: '/',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'app/dashboard/dashboard.html'
+      })
+      .state('tables', {
+        url: '/tables',
+        templateUrl: 'app/tables/tables.html'
       });
   });
