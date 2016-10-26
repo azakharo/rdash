@@ -72,4 +72,11 @@ angular.module('projectsApp')
       return chartW;
     }
 
+    window.onresize = function () {
+      $timeout(function () {
+        $scope.chartConfig.size.width = getChartW();
+      }, 0);
+    };
+
+
   });
