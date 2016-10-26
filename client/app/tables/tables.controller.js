@@ -51,7 +51,25 @@ angular.module('projectsApp')
       }, {
         name: 'London',
         data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-      }]
+      }],
+      size: {
+        width: getChartW(),
+        height: 300
+      }
     };
+
+    $scope.$watch('toggle', function () {
+      $scope.chartConfig.size.width = getChartW();
+    });
+
+    function getChartW() {
+      const windowW = window.innerWidth;
+      const sidebarW = $('#sidebar-wrapper').width();
+      const chartW = windowW - sidebarW - 80;
+      //log(`windowW = ${windowW}`);
+      //log(`sidebar = ${sidebarW}`);
+      //log(`chartW = ${chartW}`);
+      return chartW;
+    }
 
   });
