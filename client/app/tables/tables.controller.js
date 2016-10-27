@@ -3,8 +3,6 @@
 angular.module('projectsApp')
   .controller('TablesCtrl', function ($scope, $timeout) {
 
-    //$timeout(drawChart, 0, false);
-
     $scope.chartConfig = {
       options: {
         title: {
@@ -64,19 +62,24 @@ angular.module('projectsApp')
 
     function getChartW() {
       const windowW = window.innerWidth;
-      const sidebarW = $('#sidebar-wrapper').width();
-      const chartW = windowW - sidebarW - 80;
+      let sidebarW = $('#sidebar-wrapper').width();
+      if ($scope.toggle) {
+        sidebarW += 30;
+      }
+      else {
+        sidebarW -= 150;
+      }
+      const chartW = windowW - sidebarW - (2 * 20 + 2 * 15);
       //log(`windowW = ${windowW}`);
       //log(`sidebar = ${sidebarW}`);
       //log(`chartW = ${chartW}`);
       return chartW;
     }
 
-    window.onresize = function () {
+    window.onresize = debounce(function () {
       $timeout(function () {
         $scope.chartConfig.size.width = getChartW();
       }, 0);
-    };
-
+    }, 500);
 
   });
