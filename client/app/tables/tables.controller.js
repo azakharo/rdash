@@ -56,14 +56,18 @@ angular.module('projectsApp')
       }
     };
 
-    $scope.$watch('toggle', function () {
+    function updateChartW() {
       $scope.chartConfig.size.width = getChartW();
+    }
+
+    $scope.$watch('toggle', function () {
+      updateChartW();
     });
 
     function getChartW() {
       const windowW = window.innerWidth;
       let sidebarW = $('#sidebar-wrapper').width();
-      if ($scope.toggle) {
+      if ($scope.toggle === undefined || $scope.toggle) {
         sidebarW += 30;
       }
       else {
@@ -78,7 +82,7 @@ angular.module('projectsApp')
 
     window.onresize = debounce(function () {
       $timeout(function () {
-        $scope.chartConfig.size.width = getChartW();
+        updateChartW();
       }, 0);
     }, 500);
 
